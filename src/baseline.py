@@ -14,6 +14,13 @@ def evaluate_persistence(df, label):
     print(f"[{label}] Persistence — MAE={mae:.3f}  RMSE={rmse:.3f}")
     return mae, rmse
 
+def evaluate_peak_hours(df, label, peak_hours=(17, 18, 19)):
+    peak = df[df["hour"].isin(peak_hours)]
+    pred = peak["Appliances"]
+    y_true = peak["target"]
+    mae = mean_absolute_error(y_true, pred)
+    print(f"[{label}] Persistence — MAE giờ cao điểm (17-19h)={mae:.3f}")
+    return mae
 
 if __name__ == "__main__":
     df = pd.read_csv(RAW_DIR / CSV_NAME, parse_dates=["date"])
@@ -22,3 +29,4 @@ if __name__ == "__main__":
 
     evaluate_persistence(train, "train")
     evaluate_persistence(val, "validation")
+    evaluate_peak_hours(val, "validation")
