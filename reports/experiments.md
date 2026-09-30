@@ -69,3 +69,24 @@ nhiều lần so với độ lệch chuẩn tự nhiên giữa các seed (0.037)
 định rv1/rv2 — vốn là biến ngẫu nhiên theo mô tả gốc của bộ dữ liệu — không
 mang lại thông tin dự báo nào, đúng như kỳ vọng. Đây là bằng chứng cho thấy
 pipeline không bị overfitting vào nhiễu và hoạt động đúng như thiết kế.
+
+# Phân tích lỗi (tập test, mô hình RandomForest)
+
+## MAE theo giờ
+Cao nhất: 17h (77.9), 18h (60.3) — trùng khớp khung giờ cao điểm xác định ở tuần 2.
+Thấp nhất: khung đêm 0h-4h (5.7-7.2) — tiêu thụ ổn định, ít biến động, dễ dự báo.
+
+## Sai số tại đỉnh so với bình thường
+- Ngưỡng đỉnh (top 10% giá trị Appliances thực tế): 160 Wh
+- MAE tại đỉnh: 108.612
+- MAE bình thường: 21.825
+→ Sai số tại đỉnh gấp ~5 lần mức bình thường. Mô hình dự báo tốt khi tiêu thụ
+  ổn định, nhưng gặp khó khi có đột biến (nhiều thiết bị bật cùng lúc), một hành
+  vi khó nắm bắt chỉ từ cảm biến nhiệt độ/độ ẩm và lịch sử gần.
+
+## Kết luận
+Sai số tập trung mạnh vào giờ cao điểm buổi tối và các đỉnh tiêu thụ đột biến,
+đúng như dự đoán từ EDA (tuần 2). Đây là giới hạn tự nhiên của bài toán: các
+biến đầu vào (cảm biến môi trường, lag) không nắm bắt được hành vi bật thiết bị
+mang tính ngẫu nhiên của con người. Không có bằng chứng cho thấy đây là lỗi kỹ
+thuật của pipeline.
