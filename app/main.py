@@ -28,6 +28,15 @@ VALID_RANGES = {
 }
 
 app = FastAPI(title="Appliances Energy Forecast API")
+from fastapi.staticfiles import StaticFiles
+
+app.mount("/static", StaticFiles(directory=str(ROOT / "app" / "static")), name="static")
+app.mount("/figures", StaticFiles(directory=str(ROOT / "reports" / "figures")), name="figures")
+from fastapi.responses import FileResponse
+
+@app.get("/")
+def serve_index():
+    return FileResponse(ROOT / "app" / "static" / "index.html")
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"],
     allow_methods=["*"], allow_headers=["*"],
