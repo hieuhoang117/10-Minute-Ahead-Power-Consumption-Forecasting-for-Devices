@@ -1,4 +1,8 @@
 .venv/
-data/raw/
+.venv-1/
+data/raw/*.csv
 __pycache__/
 *.pyc
+*.joblib
+.agents/
+.pytest_cache/
