@@ -38,7 +38,7 @@ Nhóm **01 thành viên** (đã được giảng viên chấp thuận).
 
 | Thành viên | MSSV | Email | Vai trò |
 |---|---|---|---|
-| Hoàng Minh Hiếu | *(điền MSSV)* | hieuhoangminh2403@gmail.com | Toàn bộ pipeline: dữ liệu, mô hình, thí nghiệm, web, báo cáo |
+| Hoàng Minh Hiếu | 12523029 | hieuhoangminh2403@gmail.com | Toàn bộ pipeline: dữ liệu, mô hình, thí nghiệm, web, báo cáo |
 
 ## Tự đánh giá
 

@@ -2,6 +2,8 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
 
 from data import RAW_DIR, CSV_NAME
 from features import build_features, split_by_time, FEATURE_COLS
@@ -58,5 +60,5 @@ if __name__ == "__main__":
     # Lưu dự đoán để vẽ biểu đồ phân tích lỗi
     out = test[["date", "target", "pred", "hour"]].copy()
     out["persistence_pred"] = pred_persist.values
-    out.to_csv("reports/test_predictions.csv", index=False)
-    print("\nĐã lưu reports/test_predictions.csv để phân tích lỗi")
+    out.to_csv(ROOT / "reports" / "test_predictions.csv", index=False)
+    print("\nĐã lưu " + str(ROOT / "reports" / "test_predictions.csv") + " để phân tích lỗi")
